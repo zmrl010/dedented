@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 devDependencies:
   '@zmrl/eslint-config':
-    specifier: ^5.0.0
-    version: 5.0.0(eslint@8.38.0)(typescript@5.0.4)
+    specifier: ^6.0.0
+    version: 6.0.0(eslint@8.38.0)(typescript@5.0.4)
   eslint:
     specifier: ^8.38.0
     version: 8.38.0
@@ -299,8 +299,8 @@ packages:
       eslint-visitor-keys: 3.4.0
     dev: true
 
-  /@zmrl/eslint-config@5.0.0(eslint@8.38.0)(typescript@5.0.4):
-    resolution: {integrity: sha512-oMaUTwBNCm6MzGptaAsFS9ngBvlauOL+1UMgc2HIVC6pkg0YhCMJbkryQtUtO/uAiWeRkiemENPEfvjEdO9Rzw==}
+  /@zmrl/eslint-config@6.0.0(eslint@8.38.0)(typescript@5.0.4):
+    resolution: {integrity: sha512-/WBQ2ZZdlBte1qI4Hv2ZYM3KgTeKyP4fI/MUJ0rEDdYnaa28PKEpBayjza18TFjLyu7BIaVldJ0Dq+QswaOaag==}
     engines: {node: '>=18', pnpm: '>=7.17.0'}
     requiresBuild: true
     peerDependencies:
