@@ -6,6 +6,9 @@
   "packageManager": "pnpm@8.2.0",
   "exports": "./dist/index.js",
   "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@zmrl/eslint-config": "^6.0.0",
     "eslint": "^8.38.0",
