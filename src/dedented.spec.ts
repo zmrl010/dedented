@@ -1,6 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { dedent } from "./index.js";
 
+/**
+ * @fileoverview
+ *
+ * Test suite for `dedent()`
+ *
+ * Thanks to `ts-dedent` library
+ * @see {@link https://github.com/tamino-martinius/node-ts-dedent/blob/18c4736c79806d7fe78bdaaaf5ae307b79f9574a/src/__tests__/index.spec.ts}
+ */
+
+/**
+ * Alternative tagged template function
+ */
 function tag(strings: TemplateStringsArray, ...values: number[]) {
   let string = strings[0];
 
