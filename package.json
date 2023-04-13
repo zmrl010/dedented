@@ -2,6 +2,7 @@
   "name": "dedented",
   "version": "0.1.0",
   "description": "Utility to remove indentation from strings",
+  "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@8.2.0",
   "exports": "./dist/index.js",
