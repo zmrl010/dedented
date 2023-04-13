@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { dedent } from "./index.js";
+import { dedent } from "./dedent.js";
 
 /**
  * @fileoverview
  *
  * Test suite for `dedent()`
  *
- * Thanks to `ts-dedent` library
+ * Thanks to `ts-dedent` library for most (all) of the test cases
  * @see {@link https://github.com/tamino-martinius/node-ts-dedent/blob/18c4736c79806d7fe78bdaaaf5ae307b79f9574a/src/__tests__/index.spec.ts}
  */
 
@@ -199,7 +199,7 @@ Line #${1}
     ).toEqual("${not interpolated}\n`");
   });
 
-  it("should dedent nested dedents correctly", () => {
+  it("should dedent nested calls correctly", () => {
     const fieldDocs = dedent`
       * a
       * b
