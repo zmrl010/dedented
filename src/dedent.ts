@@ -12,48 +12,61 @@ export function dedent(
   templateStrings: TemplateStringsArray | string,
   ...args: unknown[]
 ): string {
-  const strings = [templateStrings].flat();
+  let strings = [templateStrings].flat();
 
-  // first, perform interpolation
-  let result = "";
-  for (let i = 0; i < strings.length; i++) {
-    result += strings[i]
-      // join lines when there is a suppressed newline
-      .replace(/\\\n[ \t]*/g, "")
-      // handle escaped backticks
-      .replace(/\\`/g, "`");
+  // remove trailing whitespace
+  strings[strings.length - 1] = strings[strings.length - 1].trimEnd();
 
-    if (i < args.length) {
-      result += args[i];
+  // find highest common indentation (HCI), the indent of the least indented line
+  // let hci = 0;
+  // for (const line of strings) {
+  //   const matches = line.match(/\n([\t ]+|(?!\s).)/g);
+  //   if (matches) {
+  //     matches.forEach((match) => {
+  //       const matchLength = match.match(/[\t ]/g)?.length ?? 0;
+  //     });
+  //   }
+  // }
+
+  const indentLengths = strings.flatMap((value) => {
+    const matches = value.match(/\n([\t ]+|(?!\s).)/g);
+
+    if (!matches) {
+      return [];
     }
-  }
 
-  // now strip indentation
-  const lines = result.split("\n");
-  let mindent: number | null = null;
-  lines.forEach((l) => {
-    let m = l.match(/^(\s+)\S+/);
-    if (m) {
-      let indent = m[1].length;
-      if (!mindent) {
-        // this is the first indented line
-        mindent = indent;
-      } else {
-        mindent = Math.min(mindent, indent);
-      }
-    }
+    return matches.map((match) => match.match(/[\t ]/g)?.length ?? 0);
   });
 
-  if (mindent !== null) {
-    const m = mindent; // appease Flow
-    result = lines.map((l) => (l[0] === " " ? l.slice(m) : l)).join("\n");
+  // remove the common indentation from all strings
+  if (indentLengths.length) {
+    const pattern = new RegExp(`\n[\t ]{${Math.min(...indentLengths)}}`, "g");
+
+    strings = strings.map((str) => str.replace(pattern, "\n"));
   }
 
-  return (
-    result
-      // dedent eats leading and trailing whitespace too
-      .trim()
-      // handle escaped newlines at the end to ensure they don't get stripped too
-      .replace(/\\n/g, "\n")
-  );
+  // remove leading whitespace
+  strings[0] = strings[0].trimStart();
+
+  // perform interpolation
+  let value = strings[0];
+
+  for (let i = 0; i < args.length; i++) {
+    // a. read current indentation level
+    const indentation = value.match(/(?:^|\n)( *)$/)?.[1] ?? "";
+
+    let indentedValue = args[i];
+
+    // b. add indentation to values with multiline strings
+    if (typeof indentedValue === "string" && indentedValue.includes("\n")) {
+      indentedValue = String(indentedValue)
+        .split("\n")
+        .map((str, i) => (i === 0 ? str : `${indentation}${str}`))
+        .join("\n");
+    }
+
+    value += indentedValue + strings[i + 1];
+  }
+
+  return value;
 }
