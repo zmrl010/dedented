@@ -15,7 +15,10 @@ export function dedent(
   let strings = [templateStrings].flat();
 
   // remove trailing whitespace
-  strings[strings.length - 1] = strings[strings.length - 1].trimEnd();
+  strings[strings.length - 1] = strings[strings.length - 1].replace(
+    /\r?\n([\t ]*)$/,
+    ""
+  );
 
   // find highest common indentation (HCI), the indent of the least indented line
   // let hci = 0;
@@ -46,7 +49,7 @@ export function dedent(
   }
 
   // remove leading whitespace
-  strings[0] = strings[0].trimStart();
+  strings[0] = strings[0].replace(/^\r?\n/, "");
 
   // perform interpolation
   let value = strings[0];
