@@ -14,23 +14,13 @@ export function dedent(
 ): string {
   let strings = [templateStrings].flat();
 
-  // remove trailing whitespace
+  // remove up to 1 line trailing whitespace
   strings[strings.length - 1] = strings[strings.length - 1].replace(
     /\r?\n([\t ]*)$/,
     ""
   );
 
-  // find highest common indentation (HCI), the indent of the least indented line
-  // let hci = 0;
-  // for (const line of strings) {
-  //   const matches = line.match(/\n([\t ]+|(?!\s).)/g);
-  //   if (matches) {
-  //     matches.forEach((match) => {
-  //       const matchLength = match.match(/[\t ]/g)?.length ?? 0;
-  //     });
-  //   }
-  // }
-
+  // find highest common indentation (HCI)
   const indentLengths = strings.flatMap((value) => {
     const matches = value.match(/\n([\t ]+|(?!\s).)/g);
 
@@ -52,24 +42,22 @@ export function dedent(
   strings[0] = strings[0].replace(/^\r?\n/, "");
 
   // perform interpolation
-  let value = strings[0];
+  let result = strings[0];
 
   for (let i = 0; i < args.length; i++) {
     // a. read current indentation level
-    const indentation = value.match(/(?:^|\n)( *)$/)?.[1] ?? "";
-
-    let indentedValue = args[i];
-
+    const indentation = result.match(/(?:^|\n)( *)$/)?.[1] ?? "";
+    let indentedArg = args[i];
     // b. add indentation to values with multiline strings
-    if (typeof indentedValue === "string" && indentedValue.includes("\n")) {
-      indentedValue = String(indentedValue)
+    if (typeof indentedArg === "string" && indentedArg.includes("\n")) {
+      indentedArg = String(indentedArg)
         .split("\n")
         .map((str, i) => (i === 0 ? str : `${indentation}${str}`))
         .join("\n");
     }
 
-    value += indentedValue + strings[i + 1];
+    result += indentedArg + strings[i + 1];
   }
 
-  return value;
+  return result;
 }
