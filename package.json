@@ -10,6 +10,13 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "text",
+    "utility",
+    "dedent",
+    "deindent",
+    "tagged-template"
+  ],
   "devDependencies": {
     "@zmrl/eslint-config": "^6.0.0",
     "eslint": "^8.38.0",
