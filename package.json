@@ -17,6 +17,14 @@
     "deindent",
     "tagged-template"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zmrl010/dedented.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zmrl010/dedented/issues"
+  },
+  "homepage": "https://github.com/zmrl010/dedented#readme",
   "devDependencies": {
     "@zmrl/eslint-config": "^6.0.0",
     "eslint": "^8.38.0",
