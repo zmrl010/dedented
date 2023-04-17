@@ -1,4 +1,4 @@
-# Dedent(ed)
+# de-dent(ed)
 
 A simple utility that strips indentation from multi-line strings.
 
@@ -16,10 +16,18 @@ Install with your favorite package manager
 
 ```shell
 pnpm add dedented
-# or 
-npm add dedented
-# or 
+```
+
+or
+
+```shell
 yarn add dedented
+```
+
+or
+
+```shell
+npm add dedented
 ```
 
 ## 💻 Usage
