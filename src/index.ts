@@ -31,7 +31,7 @@ export function dedent(
     return matches.map((match) => match.match(/[\t ]/g)?.length ?? 0);
   });
 
-  // remove the common indentation from all strings
+  // remove the HCI from all strings
   if (indentLengths.length) {
     const pattern = new RegExp(`\n[\t ]{${Math.min(...indentLengths)}}`, "g");
 
@@ -41,14 +41,17 @@ export function dedent(
   // remove leading whitespace
   strings[0] = strings[0].replace(/^\r?\n/, "");
 
-  // perform interpolation
+  return interpolate(strings, args);
+}
+
+function interpolate(strings: string[], args: unknown[]) {
   let result = strings[0];
 
   for (let i = 0; i < args.length; i++) {
-    // a. read current indentation level
-    const indentation = result.match(/(?:^|\n)( *)$/)?.[1] ?? "";
+    const indentation = readIndentation(result);
+
     let indentedArg = args[i];
-    // b. add indentation to values with multiline strings
+
     if (typeof indentedArg === "string" && indentedArg.includes("\n")) {
       indentedArg = String(indentedArg)
         .split("\n")
@@ -60,4 +63,8 @@ export function dedent(
   }
 
   return result;
+}
+
+function readIndentation(value: string) {
+  return value.match(/(?:^|\n)( *)$/)?.[1] ?? "";
 }
