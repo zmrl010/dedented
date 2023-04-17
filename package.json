@@ -1,6 +1,6 @@
 {
   "name": "dedented",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Utility to remove indentation from strings",
   "license": "MIT",
   "type": "module",
