@@ -1,14 +1,13 @@
-# Dedent[ed]
+# Dedent(ed)
 
 A simple utility that strips indentation from multi-line strings.
 
-This library was heavily inspired by [dedent](https://github.com/dmnd/dedent).
+## 👉 Features 👈
 
-Features:
-
-* Strip indentation from multi-line strings
+* ⬅ Strip indentation from multi-line strings
 * Tagged template literal syntax
-* Written in TypeScript
+* Function call syntax
+* Developed in TypeScript for complete typing support
 * Exports ECMAScript module (ESM)
 
 ## Install
@@ -23,7 +22,7 @@ npm add dedented
 yarn add dedented
 ```
 
-## Import
+## Usage
 
 Simply import the function and use it!
 
@@ -56,3 +55,10 @@ faucibus. Nullam posuere accumsan ipsum a rutrum. Etiam
 imperdiet justo eu commodo varius. Quisque pharetra 
 aliquam vulputate.
 ```
+
+## Credit
+
+This library draws heavily from:
+
+* [ts-dedent](https://github.com/tamino-martinius/node-ts-dedent) (test suite and implementation)
+* [dedent](https://github.com/dmnd/dedent) (inspiration)
