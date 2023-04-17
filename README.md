@@ -1,4 +1,4 @@
-# de-dent(ed)
+# dedent(ed)
 
 A simple utility that strips indentation from multi-line strings.
 
