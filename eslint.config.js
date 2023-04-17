@@ -1,4 +1,3 @@
-import config from '@zmrl/eslint-config';
-
+import config from "@zmrl/eslint-config";
 
 export default config;
